@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currency Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 380px;
+      margin-top: 25px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .label-row {
+      display: flex;
+      
+      align-items: center;
+      margin-bottom: 3px;
+    }
+
+    .label {
+      font-weight: bold;
+      font-size: 14px;
+      color: #333;
+     
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      gap: 5px;
+    }
+
+    select {
+      width: 40%;
+      padding: 6px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .swap-btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .swap-btn:hover {
+      background: #005ecb;
+    }
+
+    input {
+      width: 90%;
+      margin-top: 8px;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    button.convert-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button.convert-btn:hover {
+      background: #0062d1;
+    }
+
+    .result {
+      text-align: center;
+      margin-top: 12px;
+      font-weight: bold;
+      color: #333;
+      font-size: 17px;
+    }
+
+    .alert {
+      color: red;
+      text-align: center;
+      font-size: 14px;
+      margin-top: 6px;
+    }
+   .labelTo{
+   margin-left: 180px;
+   font-weight:bold
+   }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>💱 Currency Converter</h2>
+
+    <!-- From / To labels -->
+    <div class="label-row">
+      <span class="label">From</span>
+      <span class="labelTo">To</span>
+    </div>
+
+    <!-- Dropdown Row -->
+    <div class="row">
+      <select id="from">
+        <option value="USD">🇺🇸 USD</option>
+        <option value="EUR">🇪🇺 EUR</option>
+        <option value="GBP">🇬🇧 GBP</option>
+        <option value="BDT">🇧🇩 BDT</option>
+        <option value="INR">🇮🇳 INR</option>
+        <option value="AUD">🇦🇺 AUD</option>
+        <option value="CAD">🇨🇦 CAD</option>
+        <option value="JPY">🇯🇵 JPY</option>
+        <option value="CNY">🇨🇳 CNY</option>
+        <option value="SAR">🇸🇦 SAR</option>
+        <option value="AED">🇦🇪 AED</option>
+        <option value="OMR">🇴🇲 OMR</option>
+        <option value="QAR">🇶🇦 QAR</option>
+        <option value="CHF">🇨🇭 CHF</option>
+        <option value="SGD">🇸🇬 SGD</option>
+        <option value="NZD">🇳🇿 NZD</option>
+        <option value="SEK">🇸🇪 SEK</option>
+        <option value="NOK">🇳🇴 NOK</option>
+        <option value="DKK">🇩🇰 DKK</option>
+        <option value="HKD">🇭🇰 HKD</option>
+        <option value="KRW">🇰🇷 KRW</option>
+        <option value="THB">🇹🇭 THB</option>
+        <option value="PKR">🇵🇰 PKR</option>
+        <option value="MYR">🇲🇾 MYR</option>
+        <option value="IDR">🇮🇩 IDR</option>
+        <option value="ZAR">🇿🇦 ZAR</option>
+        <option value="RUB">🇷🇺 RUB</option>
+        <option value="TRY">🇹🇷 TRY</option>
+        <option value="EGP">🇪🇬 EGP</option>
+        <option value="NGN">🇳🇬 NGN</option>
+        <option value="ARS">🇦🇷 ARS</option>
+        <option value="BRL">🇧🇷 BRL</option>
+        <option value="MXN">🇲🇽 MXN</option>
+      </select>
+
+      <button class="swap-btn" onclick="swapCurrencies()">🔁</button>
+
+      <select id="to">
+        <option value="BDT">🇧🇩 BDT</option>
+        <option value="USD">🇺🇸 USD</option>
+        <option value="EUR">🇪🇺 EUR</option>
+        <option value="GBP">🇬🇧 GBP</option>
+        <option value="INR">🇮🇳 INR</option>
+        <option value="AUD">🇦🇺 AUD</option>
+        <option value="CAD">🇨🇦 CAD</option>
+        <option value="JPY">🇯🇵 JPY</option>
+        <option value="CNY">🇨🇳 CNY</option>
+        <option value="SAR">🇸🇦 SAR</option>
+        <option value="AED">🇦🇪 AED</option>
+        <option value="OMR">🇴🇲 OMR</option>
+        <option value="QAR">🇶🇦 QAR</option>
+        <option value="CHF">🇨🇭 CHF</option>
+        <option value="SGD">🇸🇬 SGD</option>
+        <option value="NZD">🇳🇿 NZD</option>
+        <option value="SEK">🇸🇪 SEK</option>
+        <option value="NOK">🇳🇴 NOK</option>
+        <option value="DKK">🇩🇰 DKK</option>
+        <option value="HKD">🇭🇰 HKD</option>
+        <option value="KRW">🇰🇷 KRW</option>
+        <option value="THB">🇹🇭 THB</option>
+        <option value="PKR">🇵🇰 PKR</option>
+        <option value="MYR">🇲🇾 MYR</option>
+        <option value="IDR">🇮🇩 IDR</option>
+        <option value="ZAR">🇿🇦 ZAR</option>
+        <option value="RUB">🇷🇺 RUB</option>
+        <option value="TRY">🇹🇷 TRY</option>
+        <option value="EGP">🇪🇬 EGP</option>
+        <option value="NGN">🇳🇬 NGN</option>
+        <option value="ARS">🇦🇷 ARS</option>
+        <option value="BRL">🇧🇷 BRL</option>
+        <option value="MXN">🇲🇽 MXN</option>
+      </select>
+    </div>
+
+    <!-- Amount -->
+    <label class="label">Enter Amount</label>
+    <input type="number" id="amount" placeholder="Enter Amount">
+
+    <button class="convert-btn" onclick="convert()">Exchange</button>
+
+    <div class="alert" id="alert"></div>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    async function convert() {
+      const from = document.getElementById('from').value;
+      const to = document.getElementById('to').value;
+      const amount = document.getElementById('amount').value;
+      const resultDiv = document.getElementById('result');
+      const alertDiv = document.getElementById('alert');
+
+      alertDiv.innerText = "";
+      resultDiv.innerText = "";
+
+      if (!amount) {
+        alertDiv.innerText = "⚠️ Please enter an amount!";
+        return;
+      }
+
+      if (from === to) {
+        alertDiv.innerText = "⚠️ 'From' and 'To' currencies cannot be the same!";
+        return;
+      }
+
+      try {
+        const url = `https://api.exchangerate-api.com/v4/latest/${from}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        const rate = data.rates[to];
+        const converted = (amount * rate).toFixed(2);
+        resultDiv.innerText = `${amount} ${from} = ${converted} ${to}`;
+      } catch (err) {
+        alertDiv.innerText = "❌ Conversion failed. Please try again.";
+      }
+    }
+
+    function swapCurrencies() {
+      const fromSelect = document.getElementById('from');
+      const toSelect = document.getElementById('to');
+      const temp = fromSelect.value;
+      fromSelect.value = toSelect.value;
+      toSelect.value = temp;
+      convert(); // auto update result
+    }
+  </script>
+</body>
+</html>
